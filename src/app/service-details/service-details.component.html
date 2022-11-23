@@ -1,0 +1,58 @@
+<h2 class="text-center">Plan "{{service.plan}}"</h2>
+<p class="text-center">Ingrese los datos para agendar su hora:</p>
+
+<section class="w-100 p-4 d-flex justify-content-center pb-4">
+
+
+    <form style="width: 22rem;" (ngSubmit)="onSubmit()" #detailsForm="ngForm">
+
+        <div class="form-outline mb-4">
+            <!-- input para calcular precio por metro cuadrado -->
+            <div class="form-floating">
+                <input type="number" id="meters" required min="1" [(ngModel)]="model.meters" name="meters"
+                    #meters="ngModel" class="form-control">
+                <label for="floatingInput">Metraje M2</label>
+            </div>
+
+            <!-- seccion errores para input email -->
+            <label class="form-label text-danger" for="meters" style="margin-left: 0px;"
+                [hidden]="meters.valid || meters.pristine">
+                <span *ngIf="meters.errors && meters.errors['required']">Dato metros cuadrados es requerido!</span>
+                <span *ngIf="meters.errors && meters.errors['min']">Se debe agendar con 1 o más metros cuadrados!</span>
+            </label>
+            <div class="form-notch">
+                <div class="form-notch-leading" style="width: 9px;"></div>
+                <div class="form-notch-middle" style="width: 88.8px;"></div>
+                <div class="form-notch-trailing"></div>
+            </div>
+
+            <h5>Valor por metro cuadrado: {{ service.unitValue | currency }}</h5>
+            <h5>Total: {{ service.unitValue * model.meters | currency }}</h5>
+        </div>
+        <!-- input agenda fecha hora -->
+        <div class="form-floating">
+            <input type="datetime-local" id="date" required date [(ngModel)]="model.date" name="date" #date="ngModel"
+                class="form-control">
+            <label for="floatingInput">Agenda</label>
+        </div>
+
+        <div class="form-outline mb-4">
+            <!-- seccion errores para input email -->
+            <label class="form-label text-danger" for="date" style="margin-left: 0px;"
+                [hidden]="date.valid || date.pristine">
+                <span *ngIf="date.errors && date.errors['required']">Fecha agenda es requerida!</span>
+                <span *ngIf="date.errors && date.errors['date']">Formato fecha agenda no es correcto!</span>
+            </label>
+            <div class="form-notch">
+                <div class="form-notch-leading" style="width: 9px;"></div>
+                <div class="form-notch-middle" style="width: 88.8px;"></div>
+                <div class="form-notch-trailing"></div>
+            </div>
+
+            <!-- verifica y valida antes de agendar -->
+            <div class="d-grid gap-2 mt-3">
+                <button type="submit" class="btn btn-success mb-4" [disabled]="!detailsForm.form.valid">Agendar</button>
+            </div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,72 @@
+<!-- seccion para alinear en el centro -->
+<section class="w-100 p-4 d-flex justify-content-center pb-4">
+
+    <!-- formulario para los datos login -->
+    <form style="width: 22rem;" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="form-outline mb-4">
+
+            <!-- primer input para email -->
+            <div class="form-floating">
+                <input type="email" id="email" required email [(ngModel)]="model.email" name="email" #email="ngModel"
+                    class="form-control">
+                <label for="floatingInput">Correo electrónico</label>
+            </div>
+
+            <!-- seccion errores para input email -->
+            <label class="form-label text-danger" for="email" style="margin-left: 0px;"
+                [hidden]="email.valid || email.pristine">
+                <span *ngIf="email.errors && email.errors['required']">Su correo es requerido!</span>
+                <span *ngIf="email.errors && email.errors['email']">La forma del correo no es correcta!</span>
+            </label>
+            <div class="form-notch">
+                <div class="form-notch-leading" style="width: 9px;"></div>
+                <div class="form-notch-middle" style="width: 88.8px;"></div>
+                <div class="form-notch-trailing"></div>
+            </div>
+        </div>
+        <div class="form-outline mb-4">
+
+            <!-- segundo input para password -->
+            <div class="form-floating">
+                <input type="password" id="password" required [(ngModel)]="model.password" name="password"
+                    #password="ngModel" class="form-control">
+                <label for="floatingInput">Password</label>
+            </div>
+
+            <!-- seccion errores para input password -->
+            <label class="form-label text-danger" for="password" style="margin-left: 0px;"
+                [hidden]="password.valid || password.pristine">
+                <span *ngIf="password.errors && password.errors['required']">Password es requerido!</span>
+            </label>
+            <div class="form-notch">
+                <div class="form-notch-leading" style="width: 9px;"></div>
+                <div class="form-notch-middle" style="width: 64px;"></div>
+                <div class="form-notch-trailing"></div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <!-- seccion recordarme -->
+            <div class="col d-flex justify-content-center">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="remember" checked="">
+                    <label class="form-check-label" for="remember"> Recuérdame</label>
+                </div>
+            </div>
+            <!-- seccion perdio su password -->
+            <div class="col">
+                <a href="#!">Perdió su password?</a>
+            </div>
+        </div>
+
+        <!-- boton submit para validar e ingresar -->
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-success mb-4" [disabled]="!loginForm.form.valid">Ingresar</button>
+        </div>
+
+        <!-- seccion boton para registrarse -->
+        <div class="text-center">
+            <p>No estás registrado? <a href="#!">Regístrate!</a></p>
+        </div>
+    </form>
+</section>
